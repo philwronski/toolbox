@@ -13,6 +13,7 @@ module.exports = {
     filename: 'js/[name].js'
   },
   devtool: 'inline-source-map',
+  mode: 'development',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     hot: true
@@ -47,9 +48,9 @@ module.exports = {
               sourceMap: true,
             },
           },
-          {
-            loader: 'postcss-loader',
-          },
+          // {
+          //   loader: 'postcss-loader',
+          // },
           {
             loader: 'sass-loader',
             options: {

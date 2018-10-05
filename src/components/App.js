@@ -1,8 +1,10 @@
 import React from 'react'
+import { AddTool, FilteredToolList } from '../containers'
 
 const App = () => (
   <div>
-    <p>coucou tous le monde!</p>
+    <AddTool/>
+    <FilteredToolList/>
   </div>
 )
 

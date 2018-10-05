@@ -7,6 +7,6 @@ export const actionsTypes = {
   DELETE_TOOL: 'DELETE_TOOL'
 }
 
-export const addTool = createAction(actionsTypes.ADD_TOOL, 'id')
+export const addTool = createAction(actionsTypes.ADD_TOOL, 'tool')
 export const filterTool = createAction(actionsTypes.FILTER_TOOL, 'filter')
 export const deleteTool = createAction(actionsTypes.DELETE_TOOL, 'id')

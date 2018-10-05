@@ -2,28 +2,28 @@ import { createReducer } from './utils'
 import { actionsTypes } from '../actions/tools'
 
 const initialState = {
-  tools: []
+  nextToolId: 0,
+  items: []
 }
 
-const addTool = (state = initialState, action) => {
-  const {tools, ...other} = state
-  const {tool, id} = action
-  tool['id'] = id
+const addTool = (state, action) => {
+  const {items, nextToolId, ...other} = state
   return {
     ...other,
-    tools : tools.push(tool)
+    nextToolId: nextToolId+1,
+    items : [...items, {id: nextToolId, ...action.tool}]
   }
 }
 
-const deleteTool = (state = initialState, action) => {
-  const {tools, ...other} = state
+const deleteTool = (state, action) => {
+  const {items, ...other} = state
   return {
     ...other,
-    tools : tools.filter(tool => tool.id !== action.id)
+    items : items.filter(tool => tool.id !== action.id)
   }
 }
 
-const tools = createReducer([], {
+const tools = createReducer(initialState, {
   [actionsTypes.ADD_TOOL]: addTool,
   [actionsTypes.DELETE_TOOL]: deleteTool,
 })
