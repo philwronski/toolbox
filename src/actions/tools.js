@@ -9,4 +9,5 @@ export const actionsTypes = {
 
 export const addTool = createAction(actionsTypes.ADD_TOOL, 'tool')
 export const filterTool = createAction(actionsTypes.FILTER_TOOL, 'filter')
+export const editTool = createAction(actionsTypes.EDIT_TOOL, 'tool')
 export const deleteTool = createAction(actionsTypes.DELETE_TOOL, 'id')

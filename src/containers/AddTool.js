@@ -19,8 +19,8 @@ const AddTool = ({ dispatch }) => {
   return (
     <form
       onSubmit={onSubmit}>
-      <input ref={node => (title = node)} />
-      <textarea ref={node => (description = node)} />
+      <input ref={node => (title = node)}/>
+      <textarea ref={node => (description = node)}></textarea>
       <button type="submit">Add Tool</button>
     </form>
   )
