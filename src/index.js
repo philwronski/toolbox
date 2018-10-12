@@ -1,20 +1,22 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
-import createHistory from 'history/createBrowserHistory'
-import { Router, Route } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
 import App from './components/App'
 import rootReducer from './reducers'
 
-const store = createStore(rootReducer)
-const history = createHistory();
+const store = createStore(
+  rootReducer, 
+  applyMiddleware(thunkMiddleware)
+)
 
 render(
   <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App} />
-    </Router>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 )

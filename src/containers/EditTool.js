@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { editTool } from '../actions/tools'
+import { editTool } from 'src/actions/tools'
 
 const EditTool = ({ dispatch, tool }) => {
   let title

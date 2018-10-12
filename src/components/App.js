@@ -1,10 +1,13 @@
 import React from 'react'
-import { AddTool, FilteredToolList } from '../containers'
+import { Header } from 'src/components/header'
+import { Main } from 'src/components/main'
+import { Footer } from 'src/components/footer'
 
 const App = () => (
   <>
-    <AddTool/>
-    <FilteredToolList/>
+    <Header />
+    <Main />
+    <Footer />
   </>
 )
 
