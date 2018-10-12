@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ToolList } from 'src/components/tools'
-import { deleteTool, fetchTools } from 'src/actions/tools'
+import { deleteTool, fetchToolsIdNeeded } from 'src/actions/tools'
 
 class FilteredToolList extends Component {
 
@@ -11,22 +11,26 @@ class FilteredToolList extends Component {
   }
 
   render() {
-    const { tools, deleteToolOnClick } = this.props
+    const { tools, deleteToolOnClick, isLoading } = this.props
 
     return (
-      <ToolList tools={tools} deleteToolOnClick={deleteToolOnClick} />
+      <>
+        {isLoading && <p>Loading</p>}
+        <ToolList tools={tools} deleteToolOnClick={deleteToolOnClick} />
+      </>
     )
   }
 
 }
 
 const mapStateToProps = state => ({
-  tools: state.tools.items
+  tools: state.tools.items,
+  isLoading: state.tools.isLoading
 })
 
 const mapDispatchToProps = dispatch => ({
   deleteToolOnClick: id => dispatch(deleteTool(id)),
-  fetchTools: () => dispatch(fetchTools())
+  fetchTools: () => dispatch(fetchToolsIdNeeded())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilteredToolList)

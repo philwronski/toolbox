@@ -1,5 +1,5 @@
 import { createAction } from './utils'
-import { getTools } from 'src/selectors/tools'
+import { getTools, findTools, isLoadingTool } from 'src/selectors/tools'
 
 export const actionsTypes = {
   ADD_TOOL: 'ADD_TOOL',
@@ -11,11 +11,32 @@ export const actionsTypes = {
   RECEIVE_TOOLS: 'RECEIVE_TOOLS'
 }
 
-export const fetchTools = () => async (dispatch) => {
+const fetchTools = () => async (dispatch) => {
   dispatch(isLoadingTools(true))
   const tools = await getTools()
   if(tools) {
-    dispatch(reveiveTools(tools))
+    await dispatch(reveiveTools(tools))
+    dispatch(isLoadingTools(false))
+  }
+}
+
+const shouldFetchTools = (state) => {
+  const items = findTools(state)
+  console.log(items, !!items)
+  if (!!items) {
+    return true
+  } else if (isLoadingTool(state)) {
+    return false
+  } else {
+    return false
+  }
+}
+
+export const fetchToolsIdNeeded = () => async (dispatch, getState) => {
+  if(shouldFetchTools(getState())) {
+    return dispatch(fetchTools())
+  } else {
+    return Promise.resolve()
   }
 }
 
