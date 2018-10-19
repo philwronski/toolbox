@@ -1,6 +1,5 @@
 import { createReducer } from './utils'
 import { actionsTypes } from 'src/actions/tools'
-import { uuidv4 } from 'src/utils'
 
 const initialState = {
   isLoading: false,
@@ -11,7 +10,7 @@ const addTool = (state, action) => {
   const { items } = state
   return {
     ...state,
-    items : [...items, {id: uuidv4(), ...action.tool}]
+    items : [...items, action.tool]
   }
 }
 

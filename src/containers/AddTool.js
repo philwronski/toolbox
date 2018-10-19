@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addTool } from 'src/actions/tools'
+import { addTool, saveTool } from 'src/actions/tools'
 
 const AddTool = ({ dispatch }) => {
   let title
@@ -11,7 +11,7 @@ const AddTool = ({ dispatch }) => {
     if (!title.value.trim() || !description.value.trim()) {
       return
     }
-    dispatch(addTool({title: title.value, description: description.value}))
+    dispatch(saveTool({title: title.value, description: description.value}, false))
     title.value = ''
     description.value = ''
   }

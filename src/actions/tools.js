@@ -1,5 +1,7 @@
 import { createAction } from './utils'
-import { getTools, findTools, isLoadingTool } from 'src/selectors/tools'
+import { getTools, saveTool as _saveTool } from 'src/api/tools'
+import { findTools, isLoadingTool } from 'src/selectors/tools'
+import { uuidv4 } from 'src/utils'
 
 export const actionsTypes = {
   ADD_TOOL: 'ADD_TOOL',
@@ -22,8 +24,7 @@ const fetchTools = () => async (dispatch) => {
 
 const shouldFetchTools = (state) => {
   const items = findTools(state)
-  console.log(items, !!items)
-  if (!!items) {
+  if (!items || items.length == 0) {
     return true
   } else if (isLoadingTool(state)) {
     return false
@@ -37,6 +38,15 @@ export const fetchToolsIdNeeded = () => async (dispatch, getState) => {
     return dispatch(fetchTools())
   } else {
     return Promise.resolve()
+  }
+}
+
+export const saveTool = (tool, refresh) => async (dispatch) => {
+  tool['id'] = uuidv4()
+  await dispatch(addTool(tool))
+  await _saveTool(tool)
+  if(refresh) {
+    dispatch(fetchTools())
   }
 }
 
